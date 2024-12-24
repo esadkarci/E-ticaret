@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.CQRS.Commands.OrderDetailsCommands;
 using MultiShop.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers;
+using MultiShop.Order.Application.Features.CQRS.Queries.OrderDetailQueries;
 
 namespace MultiShop.Order.WebApi.Controllers
 {
@@ -34,7 +35,7 @@ namespace MultiShop.Order.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrderDetailById(int id)
         {
-            var value = await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailByIdQuery(id));
+            var value = await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailQuery(id));
             return Ok(value);
         }
 
@@ -48,7 +49,7 @@ namespace MultiShop.Order.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> RemoveOrderDetail(int id)
         {
-            await _removeOrderDetailCommandHandler.Handle(new RemoveOrderDetailCommand(id));
+            await _removeOrderDetailCommandHandler.Handle(new RemoveOrderDerailCommand(id));
             return Ok("Sipariş detayı başarıyla silindi");
         }
 
